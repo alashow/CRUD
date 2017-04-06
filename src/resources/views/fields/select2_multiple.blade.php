@@ -1,4 +1,4 @@
-<!-- select2 multiple -->
+{{-- select2 multiple --}}
 <div @include('crud::inc.field_wrapper_attributes') >
     <label>{!! $field['label'] !!}</label>
     @include('crud::inc.field_translatable_icon')
@@ -32,14 +32,14 @@
 
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
     @push('crud_fields_styles')
-        <!-- include select2 css-->
+        {{-- include select2 css--}}
         <link href="{{ asset('vendor/backpack/select2/select2.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('vendor/backpack/select2/select2-bootstrap-dick.css') }}" rel="stylesheet" type="text/css" />
     @endpush
 
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
-        <!-- include select2 js-->
+        {{-- include select2 js--}}
         <script src="{{ asset('vendor/backpack/select2/select2.js') }}"></script>
         <script>
             jQuery(document).ready(function($) {

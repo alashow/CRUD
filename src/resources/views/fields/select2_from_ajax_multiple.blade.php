@@ -1,4 +1,4 @@
-<!-- select2 from ajax multiple -->
+{{-- select2 from ajax multiple --}}
 <div @include('crud::inc.field_wrapper_attributes') >
     <label>{!! $field['label'] !!}</label>
     <input type="hidden" name="{{ $field['name'] }}" id="select2_ajax_multiple_{{ $field['name'] }}"
@@ -26,20 +26,20 @@
 
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
     @push('crud_fields_styles')
-    <!-- include select2 css-->
+    {{-- include select2 css--}}
     <link href="{{ asset('vendor/backpack/select2/select2.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('vendor/backpack/select2/select2-bootstrap-dick.css') }}" rel="stylesheet" type="text/css" />
     @endpush
 
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
-    <!-- include select2 js-->
+    {{-- include select2 js--}}
     <script src="{{ asset('vendor/backpack/select2/select2.js') }}"></script>
     @endpush
 
 @endif
 
-<!-- include field specific select2 js-->
+{{-- include field specific select2 js--}}
 @push('crud_fields_scripts')
 <script>
     jQuery(document).ready(function($) {
