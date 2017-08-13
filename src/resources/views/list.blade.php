@@ -159,24 +159,25 @@
 	  jQuery(document).ready(function($) {
 
       @if ($crud->exportButtons())
-      var dtButtons = function(buttons){
-          var extended = [];
-          for(var i = 0; i < buttons.length; i++){
-          var item = {
-              extend: buttons[i],
-              exportOptions: {
-              columns: [':visible']
-              }
-          };
-          switch(buttons[i]){
-              case 'pdfHtml5':
-              item.orientation = 'landscape';
-              break;
-          }
-          extended.push(item);
-          }
-          return extended;
-      }
+          var dtButtons = function (buttons) {
+                  var extended = [];
+                  for (var i = 0; i < buttons.length; i++) {
+                      var item = {
+                          extend: buttons[i],
+                          footer: true,
+                          exportOptions: {
+                              columns: [':visible']
+                          }
+                      };
+                      switch (buttons[i]) {
+                          case 'pdfHtml5':
+                              item.orientation = 'landscape';
+                              break;
+                      }
+                      extended.push(item);
+                  }
+                  return extended;
+              };
       @endif
 
 	  	var table = $("#crudTable").DataTable({
