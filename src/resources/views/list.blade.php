@@ -164,6 +164,7 @@
           for(var i = 0; i < buttons.length; i++){
           var item = {
               extend: buttons[i],
+              footer: true,
               exportOptions: {
               columns: [':visible']
               }
@@ -197,7 +198,7 @@
                     }, 0);
 
                 // TODO: add option for custom prefix/suffix instead of adding to default header label
-                $(column.footer()).html($(column.header()).text() + ' (' + sum.toFixed(2) + ')');
+                $(column.footer()).html(sum.toFixed(2))
             });
         },
         "pageLength": {{ $crud->getDefaultPageLength() }},
