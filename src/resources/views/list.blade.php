@@ -164,6 +164,7 @@
                   for (var i = 0; i < buttons.length; i++) {
                       var item = {
                           extend: buttons[i],
+                          footer: true,
                           exportOptions: {
                               columns: [':visible']
                           }
