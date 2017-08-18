@@ -214,13 +214,19 @@ trait Read
     }
 
     /**
-     * Add field/column name to include in select query when using ajax tables
+     * Add fields/columns names to include in select query when using ajax tables.
      *
-     * @param string $field field/column name
+     * @param string|array $fields fields/columns names.
      */
-    public function addAjaxExtraField($field)
+    public function addAjaxExtraFields($fields)
     {
-        array_push($this->ajax_extra_fields, $field);
+        if (is_array($fields)) {
+            array_merge($this->ajax_extra_fields, $fields);
+        } else {
+            if (is_string($fields)) {
+                array_push($this->ajax_extra_fields, $fields);
+            }
+        }
     }
 
     /**
