@@ -201,6 +201,7 @@
                 $(column.footer()).html(sum.toFixed(2))
             });
         },
+        "autoWidth": false,
         "pageLength": {{ $crud->getDefaultPageLength() }},
         /* Disable initial sort */
         "aaSorting": [],
@@ -258,6 +259,9 @@
           ]),
           @endif
       });
+
+      $("#crudTable").css('width', '100%');
+      table.columns.adjust();
 
       @if ($crud->exportButtons())
       // move the datatable buttons in the top-right corner and make them smaller
