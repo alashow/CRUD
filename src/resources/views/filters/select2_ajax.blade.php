@@ -52,7 +52,6 @@
         jQuery(document).ready(function($) {
             // trigger select2 for each untriggered select2 box
             $('#filter_{{ $filter->name }}').select2({
-			    minimumInputLength: 2,
             	allowClear: true,
         	    placeholder: "{{ $filter->placeholder?$filter->placeholder:' ' }}",
 				closeOnSelect: false,
