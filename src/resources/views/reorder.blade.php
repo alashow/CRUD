@@ -99,8 +99,8 @@ function tree_element($entry, $key, $all_entries, $crud)
 @section('after_scripts')
 <script src="{{ asset('vendor/backpack/crud/js/crud.js') }}"></script>
 <script src="{{ asset('vendor/backpack/crud/js/reorder.js') }}"></script>
-<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js" type="text/javascript"></script>
-<script src="{{ url('vendor/backpack/nestedSortable/jquery.mjs.nestedSortable2.js') }}" type="text/javascript"></script>
+<script src="{{ url('vendor/backpack/nestedSortable/jquery.mjs.nestedSortable2.js') }}"></script>
+<script src="{{ asset('vendor/backpack/angular/jquery-ui.min.js') }}"></script>
 
 <script type="text/javascript">
     jQuery(document).ready(function($) {
