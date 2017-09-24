@@ -72,7 +72,7 @@
 @endpush
 
 @push('crud_list_scripts')
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.18.2/URI.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="{{ asset('vendor/backpack/URI.js/URI.min.js' }}"></script>
     <script>
       function addOrUpdateUriParameter(uri, parameter, value) {
             var new_url = normalizeAmpersand(uri);
