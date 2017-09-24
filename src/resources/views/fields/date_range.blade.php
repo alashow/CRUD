@@ -48,7 +48,7 @@
 
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
-    <script src="{{ asset('/vendor/adminlte/plugins/daterangepicker/moment.min.js') }}"></script>
+    <script src="{{ asset('vandor/backpack/moment/moment-with-locales.min.js') }}"></script>
     <script src="{{ asset('/vendor/adminlte/plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script>
         jQuery(document).ready(function($){
