@@ -91,9 +91,9 @@
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
         {{-- YOUR JS HERE --}}
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.14.3/sortable.min.js"></script>
+        <script type="text/javascript" src="{{ asset('vendor/backpack/angular/angular.min.js' }}"></script>
+        <script type="text/javascript" src="{{ asset('vendor/backpack/angular/jquery-ui.min.js' }}"></script>
+        <script type="text/javascript" src="{{ asset('vendor/backpack/angular/sortable.min.js' }}"></script>
         <script>
 
             window.angularApp = window.angularApp || angular.module('backPackTableApp', ['ui.sortable'], function($interpolateProvider){
