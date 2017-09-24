@@ -72,7 +72,7 @@
 @endpush
 
 @push('crud_list_scripts')
-	<script type="text/javascript" src="{{ asset('vendor/backpack/URI.js/URI.min.js' }}"></script>
+	<script type="text/javascript" src="{{ asset('vendor/backpack/URI.js/URI.min.js') }}"></script>
     <script>
       function addOrUpdateUriParameter(uri, parameter, value) {
             var new_url = normalizeAmpersand(uri);
