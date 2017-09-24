@@ -59,7 +59,7 @@ if (isset($field['value']) && (is_array($field['value']) || is_object($field['va
 
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
-    <script src="{{ asset('vendor/backpack/places.js/places.min.js' }}"></script>
+    <script src="{{ asset('vendor/backpack/places.js/places.min.js') }}"></script>
     <script>
         jQuery(document).ready(function($){
             window.AlgoliaPlaces = window.AlgoliaPlaces || {};
