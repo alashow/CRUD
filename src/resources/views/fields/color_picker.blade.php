@@ -28,12 +28,12 @@
 
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
     @push('crud_fields_styles')
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.5/css/bootstrap-colorpicker.min.css" />
+        <link rel="stylesheet" href="{{ asset('vendor/backpack/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css' }}" />
     @endpush
 
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.5/js/bootstrap-colorpicker.min.js"></script>
+    <script type="text/javascript" src="{{ asset('vendor/backpack/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js' }}"></script>
     @endpush
 
 @endif
@@ -41,7 +41,7 @@
 @push('crud_fields_scripts')
 <script type="text/javascript">
     jQuery('document').ready(function($){
-        //https://itsjaviaguilar.com/bootstrap-colorpicker/
+        // https://farbelous.github.io/bootstrap-colorpicker/
         var config = jQuery.extend({}, {!! isset($field['color_picker_options']) ? json_encode($field['color_picker_options']) : '{}' !!});
         var picker = $('[name="{{ $field['name'] }}"]').parents('.colorpicker-component').colorpicker(config);
         $('[name="{{ $field['name'] }}"]').on('focus', function(){
