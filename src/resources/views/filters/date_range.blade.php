@@ -42,7 +42,7 @@
 
 @push('crud_list_styles')
     <!-- include select2 css-->
-	<link rel="stylesheet" type="text/css" href="{{ asset('vandor/backpack/daterangepicker/daterangepicker.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/backpack/daterangepicker/daterangepicker.css') }}" />
 	<style>
 		.input-group.date {
 			width: 320px;
@@ -58,8 +58,8 @@
 {{-- push things in the after_scripts section --}}
 
 @push('crud_list_scripts')
-	<script type="text/javascript" src="{{ asset('vandor/backpack/moment/moment-with-locales.min.js') }}"></script>
-	<script type="text/javascript" src="{{ asset('vandor/backpack/daterangepicker/daterangepicker.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('vendor/backpack/moment/moment-with-locales.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('vendor/backpack/daterangepicker/daterangepicker.js') }}"></script>
   <script>
 
   		function applyDateRangeFilter(start, end) {
