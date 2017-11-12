@@ -60,6 +60,7 @@ class CrudPanel
     public $buttons;
     public $db_column_types = [];
     public $default_page_length = false;
+    public $page_length_menu = false;
 
     // extra columns to query when using ajax tables
     public $ajax_extra_fields = [];
