@@ -43,6 +43,7 @@
                 @endif
 
                 {{-- Table columns (headers) --}}
+                @foreach ($crud->columns as $column)
                 <th {{ isset($column['orderable']) ? 'data-orderable=' .var_export($column['orderable'], true) : '' }}
                     class="{{ isset($column['class']) ? $column['class'] : ''}}">
                     {{ $column['label'] }}
