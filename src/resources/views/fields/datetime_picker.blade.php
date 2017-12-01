@@ -39,14 +39,14 @@ if (isset($field['value']) && ( $field['value'] instanceof \Carbon\Carbon || $fi
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
     @push('crud_fields_styles')
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins/datepicker/datepicker3.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/backpack/bootsrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/backpack/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" />
     @endpush
 
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
     <script src="{{ asset('vendor/adminlte/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendor/backpack/moment/moment-with-locales.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/backpack/bootsrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/backpack/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
     @if ($field_language !== 'en')
         <script charset="UTF-8" src="{{ asset('vendor/adminlte/plugins/datepicker/locales/bootstrap-datepicker.'.$field_language.'.js') }}"></script>
     @endif
