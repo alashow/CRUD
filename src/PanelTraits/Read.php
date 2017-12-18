@@ -122,7 +122,7 @@ trait Read
     }
 
     /**
-     * Set the number of rows that should be show on the table page (list view).
+     * Set the number of rows that should be show on the list view.
      */
     public function setDefaultPageLength($value)
     {
@@ -130,7 +130,7 @@ trait Read
     }
 
     /**
-     * Get the number of rows that should be show on the table page (list view).
+     * Get the number of rows that should be show on the list view.
      */
     public function getDefaultPageLength()
     {
@@ -148,25 +148,24 @@ trait Read
     }
 
     /**
-     * Specify array of available page lengths on the table page (list view).
+     * Specify array of available page lengths on the list view.
      *
-     * @param array $array 1d array of page length values,
+     * @param array $menu 1d array of page length values,
      *                     or 2d array (first array: page length values, second array: page length labels)
      *                     More at: https://datatables.net/reference/option/lengthMenu
      */
-    public function setPageLengthMenu($array)
+    public function setPageLengthMenu($menu)
     {
-        $this->page_length_menu = $array;
+        $this->page_length_menu = $menu;
     }
 
     /**
-     * Get page length menu for the table page (list view).
+     * Get page length menu for the list view.
      *
      * @return array
      */
     public function getPageLengthMenu()
     {
-        // return the custom value for this crud panel, if set using setPageLengthMenu()
         if ($this->page_length_menu) {
             return $this->page_length_menu;
         }
