@@ -43,8 +43,8 @@
 
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
     @push('crud_fields_styles')
-    {{-- include select2 css--}}
-    <link href="{{ asset('vendor/adminlte/plugins/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- include select2 css-->
+    <link href="{{ asset('vendor/adminlte/bower_components/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('vendor/backpack/select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     @endpush
 
@@ -53,7 +53,7 @@
     {{-- include select2 js--}}
     <script src="{{ asset('vendor/backpack/select2/select2.js') }}"></script>
     <!-- include select2 js-->
-    <script src="{{ asset('vendor/adminlte/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/bower_components/select2/dist/js/select2.min.js') }}"></script>
     @endpush
 
 @endif

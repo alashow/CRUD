@@ -62,7 +62,7 @@
     <script>
         jQuery(document).ready(function($) {
             // trigger select2 for each untriggered select2 box
-            $('.select2').each(function (i, obj) {
+            $('.select2').each(function (i, obj) [iyyy;{
                 if (!$(obj).data("select2"))
                 {
                     $(obj).select2({
@@ -77,14 +77,12 @@
     <script>
 		jQuery(document).ready(function($) {
 			$("select[name=filter_{{ $filter->name }}]").change(function() {
-                var value;
+                var value = '';
                 if ($(this).val() !== null) {
                     // clean array from undefined, null, "".
                     var values = $(this).val().filter(function(e){ return e === 0 || e });
                     // stringify only if values is not empty. otherwise it will be '[]'.
                     value = values.length !== 0 ? JSON.stringify(values) : '';
-                } else {
-                    value = '';
                 }
 				var parameter = '{{ $filter->name }}';
 

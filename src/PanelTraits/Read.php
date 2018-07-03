@@ -11,6 +11,44 @@ trait Read
     */
 
     /**
+     * Find and retrieve the id of the current entry.
+     *
+     * @return [Number] The id in the db or false.
+     */
+    public function getCurrentEntryId()
+    {
+        if ($this->entry) {
+            return $this->entry->getKey();
+        }
+
+        $params = \Route::current()->parameters();
+
+        return  // use the entity name to get the current entry
+                // this makes sure the ID is corrent even for nested resources
+                $this->request->{$this->entity_name} ??
+                // otherwise use the next to last parameter
+                array_values($params)[count($params) - 1] ??
+                // otherwise return false
+                false;
+    }
+
+    /**
+     * Find and retrieve the current entry.
+     *
+     * @return [Eloquent Collection] The row in the db or false.
+     */
+    public function getCurrentEntry()
+    {
+        $id = $this->getCurrentEntryId();
+
+        if (! $id) {
+            return false;
+        }
+
+        return $this->getEntry($id);
+    }
+
+    /**
      * Find and retrieve an entry in the database or fail.
      *
      * @param  [int] The id of the row in the db to fetch.
@@ -148,6 +186,25 @@ trait Read
     }
 
     /**
+     * If a custom page length was specified as default, make sure it
+     * also show up in the page length menu.
+     */
+    public function addCustomPageLengthToPageLengthMenu()
+    {
+        // If the default Page Length isn't in the menu's values, Add it the beginnin and resort all to show a croissant list.
+        // assume both array are the same lenght.
+        if (! in_array($this->getDefaultPageLength(), $this->page_length_menu[0])) {
+            // Loop through 2 arrays of prop. page_length_menu
+            foreach ($this->page_length_menu as $key => &$page_length_choices) {
+                // This is a condition that should be always true.
+                if (is_array($page_length_choices)) {
+                    array_unshift($page_length_choices, $this->getDefaultPageLength());
+                }
+            }
+        }
+    }
+
+    /**
      * Specify array of available page lengths on the list view.
      *
      * @param array $menu 1d array of page length values,
@@ -166,12 +223,24 @@ trait Read
      */
     public function getPageLengthMenu()
     {
-        if ($this->page_length_menu) {
-            return $this->page_length_menu;
+        // if already set, use that
+        if (! $this->page_length_menu) {
+            // try to get the menu settings from the config file
+            if (! $this->page_length_menu = config('backpack.crud.page_length_menu')) {
+                // otherwise set a sensible default
+                $this->page_length_menu = [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'backpack::crud.all']];
+            }
+            // if we have a 2D array, update all the values in the right hand array to their translated values
+            if (isset($this->page_length_menu[1]) && is_array($this->page_length_menu[1])) {
+                foreach ($this->page_length_menu[1] as $key => $val) {
+                    $this->page_length_menu[1][$key] = trans($val);
+                }
+            }
         }
 
-        // otherwise return default value
-        return [[10, 25, 50, 100, -1], [10, 25, 50, 100, trans('backpack::crud.all')]];
+        $this->addCustomPageLengthToPageLengthMenu();
+
+        return $this->page_length_menu;
     }
 
     /*

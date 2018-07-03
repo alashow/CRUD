@@ -19,12 +19,19 @@
 	<div class="col-md-8 col-md-offset-2">
 		{{-- Default box --}}
 		@if ($crud->hasAccess('list'))
-			<a href="{{ url($crud->route) }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
+			<a href="{{ url($crud->route) }}" class="hidden-print"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
 		@endif
 
 		@include('crud::inc.grouped_errors')
 
-		  {!! Form::open(array('url' => $crud->route.'/'.$entry->getKey(), 'method' => 'put', 'files'=>$crud->hasUploadFields('update', $entry->getKey()))) !!}
+		  <form method="post"
+		  		action="{{ url($crud->route.'/'.$entry->getKey()) }}"
+				@if ($crud->hasUploadFields('update', $entry->getKey()))
+				enctype="multipart/form-data"
+				@endif
+		  		>
+		  {!! csrf_field() !!}
+		  {!! method_field('PUT') !!}
 		  <div class="box">
 		    <div class="box-header with-border">
 		    	@if ($crud->model->translationEnabled())
@@ -44,7 +51,7 @@
 					<h3 class="box-title">{{ trans('backpack::crud.edit') }}</h3>
 				@endif
 		    </div>
-		    <div class="box-body row">
+		    <div class="box-body row display-flex-wrap" style="display: flex;flex-wrap: wrap;">
 		      {{-- load the view from the application if it exists, otherwise load the one in the package --}}
 		      @if(view()->exists('vendor.backpack.crud.form_content'))
 		      	@include('vendor.backpack.crud.form_content', ['fields' => $fields, 'action' => 'edit'])
@@ -57,9 +64,9 @@
 
                 @include('crud::inc.form_save_buttons')
 
-		    </div>{{-- /.box-footer--}}
-		  </div>{{-- /.box --}}
-		  {!! Form::close() !!}
+		    </div><!-- /.box-footer-->
+		  </div><!-- /.box -->
+		  </form>
 	</div>
 </div>
 @endsection

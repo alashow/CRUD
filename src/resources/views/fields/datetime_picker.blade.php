@@ -37,16 +37,17 @@ if (isset($field['value']) && ( $field['value'] instanceof \Carbon\Carbon || $fi
 
     {{-- FIELD CSS - will be loaded in the after_styles section --}}
     @push('crud_fields_styles')
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/plugins/datepicker/datepicker3.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/backpack/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css') }}" />
     @endpush
 
     {{-- FIELD JS - will be loaded in the after_scripts section --}}
     @push('crud_fields_scripts')
-    <script src="{{ asset('vendor/adminlte/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('vendor/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendor/backpack/moment/moment-with-locales.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendor/backpack/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
     @if ($field_language !== 'en')
+        <script charset="UTF-8" src="{{ asset('vendor/adminlte/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.'.$field_language.'.min.js') }}"></script>
         <script charset="UTF-8" src="{{ asset('vendor/adminlte/plugins/datepicker/locales/bootstrap-datepicker.'.$field_language.'.js') }}"></script>
     @endif
     <script>
@@ -59,7 +60,10 @@ if (isset($field['value']) && ( $field['value'] instanceof \Carbon\Carbon || $fi
                 $field = $fake.parents('.form-group').find('input[type="hidden"]'),
                 $customConfig = $.extend({
                     format: 'DD/MM/YYYY HH:mm',
-                    defaultDate: $field.val()
+                    defaultDate: $field.val(),
+                    @if(isset($field['allows_null']) && $field['allows_null'])
+                    showClear: true,
+                    @endif
                 }, $fake.data('bs-datetimepicker'));
 
                 $customConfig.locale = $customConfig['language'];

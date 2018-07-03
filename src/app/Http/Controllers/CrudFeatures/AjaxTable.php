@@ -16,6 +16,7 @@ trait AjaxTable
         $this->crud->hasAccessOrFail('list');
 
         $totalRows = $filteredRows = $this->crud->count();
+        $startIndex = $this->request->input('start') ?: 0;
 
         // if a search term was present
         if ($this->request->input('search') && $this->request->input('search')['value']) {
@@ -38,19 +39,19 @@ trait AjaxTable
         // overwrite any order set in the setup() method with the datatables order
         if ($this->request->input('order')) {
             $column_number = $this->request->input('order')[0]['column'];
-            if ($this->crud->details_row) {
-                $column_number = $column_number - 1;
-            }
             $column_direction = $this->request->input('order')[0]['dir'];
             $column = $this->crud->findColumnById($column_number);
 
             if ($column['tableColumn']) {
+                // clear any past orderBy rules
+                $this->crud->query->getQuery()->orders = null;
+                // apply the current orderBy rules
                 $this->crud->orderBy($column['name'], $column_direction);
             }
         }
 
         $entries = $this->crud->getEntries();
 
-        return $this->crud->getEntriesAsJsonForDatatables($entries, $totalRows, $filteredRows);
+        return $this->crud->getEntriesAsJsonForDatatables($entries, $totalRows, $filteredRows, $startIndex);
     }
 }

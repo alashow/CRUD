@@ -24,9 +24,7 @@
         }
     ],
     "require": {
-        "backpack/base": "^0.8.0",
-        "laravelcollective/html": "~5.0",
-        "barryvdh/laravel-elfinder": "^0.3.10",
+        "backpack/base": "0.9.1.2",
         "doctrine/dbal": "^2.5",
         "venturecraft/revisionable": "1.*",
         "intervention/image": "^2.3"
@@ -65,5 +63,11 @@
                 "CRUD": "Backpack\\CRUD\\CrudServiceProvider"
             }
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:alashow/Base.git"
+        }
+    ]
 }

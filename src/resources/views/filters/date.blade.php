@@ -17,8 +17,8 @@
 							value="{{ $filter->currentValue }}"
 						@endif
 		        		>
-		        <div class="input-group-addon">
-		          <a class="datepicker-{{ str_slug($filter->name) }}-clear-button" href=""><i class="fa fa-times"></i></a>
+		        <div class="input-group-addon datepicker-{{ str_slug($filter->name) }}-clear-button">
+		          <a class="" href=""><i class="fa fa-times"></i></a>
 		        </div>
 		    </div>
 		</div>
@@ -32,7 +32,7 @@
 {{-- push things in the after_styles section --}}
 
 @push('crud_list_styles')
-    <link href="{{ asset('vendor/adminlte/plugins/datepicker/datepicker3.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css') }}">
 	<style>
 		.input-group.date {
 			width: 320px;
@@ -82,15 +82,13 @@
 				if (URI(new_url).hasQuery('{{ $filter->name }}', true)) {
 					$('li[filter-name={{ $filter->name }}]').removeClass('active').addClass('active');
 				}
-				else
-				{
-					$('li[filter-name={{ $filter->name }}]').trigger('filter:clear');
-				}
 			});
+
 			$('li[filter-name={{ str_slug($filter->name) }}]').on('filter:clear', function(e) {
 				// console.log('date filter cleared');
 				$('li[filter-name={{ $filter->name }}]').removeClass('active');
-				$('#datepicker-{{ str_slug($filter->name) }}').datepicker('clearDates');
+				$('#datepicker-{{ str_slug($filter->name) }}').datepicker('update', '');
+				$('#datepicker-{{ str_slug($filter->name) }}').trigger('changeDate');
 			});
 
 			// datepicker clear button
@@ -98,7 +96,6 @@
 				e.preventDefault();
 
 				$('li[filter-name={{ str_slug($filter->name) }}]').trigger('filter:clear');
-				$('#datepicker-{{ str_slug($filter->name) }}').trigger('changeDate');
 			})
 		});
   </script>
