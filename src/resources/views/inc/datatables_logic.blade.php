@@ -1,5 +1,6 @@
  {{-- DATA TABLES SCRIPT --}}
- <script src="{{ asset('vendor/adminlte/plugins/datatables/jquery.dataTables.js') }}" type="text/javascript"></script>
+ <script src="{{ asset('vendor/backpack/datatables/jquery.dataTables.min.js') }}"></script>
+ <script src="{{ asset('vendor/backpack/datatables/dataTables.bootstrap.min.js') }}"></script>
 
  <script src="{{ asset('vendor/backpack/crud/js/crud.js') }}"></script>
  <script src="{{ asset('vendor/backpack/crud/js/form.js') }}"></script>
@@ -15,6 +16,13 @@
                  if (this.functionsToRunOnDataTablesDrawEvent.indexOf(functionName) == -1) {
                      this.functionsToRunOnDataTablesDrawEvent.push(functionName);
                  }
+             },
+             executeFunctionByName: function(str, args) {
+                var arr = str.split('.');
+                var fn = window[ arr[0] ];
+                for (var i = 1; i < arr.length; i++)
+                { fn = fn[ arr[i] ]; }
+                fn.apply(window, args);
              },
              dataTableConfiguration: {
                  drawCallback: function (row, data, start, end, display) {
@@ -85,7 +93,6 @@
                  "<'row'<'col-sm-4'i><'col-sm-4'B><'col-sm-4'p>>",
              }
          }
-  }
   </script>
 
   @include('crud::inc.export_buttons')

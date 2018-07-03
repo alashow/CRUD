@@ -62,7 +62,7 @@
     <script>
         jQuery(document).ready(function($) {
             // trigger select2 for each untriggered select2 box
-            $('.select2').each(function (i, obj) [iyyy;{
+            $('.select2').each(function (i, obj) {
                 if (!$(obj).data("select2"))
                 {
                     $(obj).select2({
