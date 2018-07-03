@@ -16,15 +16,16 @@
 
 @section('content')
 	@if ($crud->hasAccess('list'))
-		<a href="{{ url($crud->route) }}"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span class="text-lowercase">{{ $crud->entity_name_plural }}</span></a><br><br>
+		<a href="{{ url($crud->route) }}" class="hidden-print"><i class="fa fa-angle-double-left"></i> {{ trans('backpack::crud.back_to_all') }} <span>{{ $crud->entity_name_plural }}</span></a><br><br>
 	@endif
 
 	<!-- Default box -->
 	  <div class="box">
 	    <div class="box-header with-border">
+	    	<span class="pull-right"><a href="javascript: window.print();"><i class="fa fa-print"></i></a></span>
 	      <h3 class="box-title">
             {{ trans('backpack::crud.preview') }}
-            <span class="text-lowercase">{{ $crud->entity_name }}</span>
+            <span>{{ $crud->entity_name }}</span>
           </h3>
 	    </div>
 	    <div class="box-body">
@@ -35,6 +36,7 @@
 		                <td>
 		                    <strong>{{ $column['label'] }}</strong>
 		                </td>
+                        <td>
 							@if (!isset($column['type']))
 		                      @include('crud::columns.text')
 		                    @else
@@ -48,11 +50,12 @@
 		                        @endif
 		                      @endif
 		                    @endif
+                        </td>
 		            </tr>
 		        @endforeach
 				@if ($crud->buttons->where('stack', 'line')->count())
 					<tr>
-						<td><strong>{{ trans('backpack::crud.actions') }}</td>
+						<td><strong>{{ trans('backpack::crud.actions') }}</strong></td>
 						<td>
 							@include('crud::inc.button_stack', ['stack' => 'line'])
 						</td>

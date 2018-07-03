@@ -4,17 +4,16 @@ namespace Backpack\CRUD\app\Http\Controllers;
 
 use Backpack\CRUD\CrudPanel;
 use Illuminate\Http\Request;
+use Illuminate\Http\Request as StoreRequest;
 use Illuminate\Support\Facades\Form as Form;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\Request as UpdateRequest;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Backpack\CRUD\app\Http\Controllers\CrudFeatures\Reorder;
 use Backpack\CRUD\app\Http\Controllers\CrudFeatures\AjaxTable;
-// CRUD Traits for non-core features
 use Backpack\CRUD\app\Http\Controllers\CrudFeatures\Revisions;
 use Backpack\CRUD\app\Http\Controllers\CrudFeatures\SaveActions;
-use Backpack\CRUD\app\Http\Requests\CrudRequest as StoreRequest;
-use Backpack\CRUD\app\Http\Requests\CrudRequest as UpdateRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudFeatures\ShowDetailsRow;
 
 class CrudController extends BaseController
@@ -114,7 +113,7 @@ class CrudController extends BaseController
         }
 
         // insert item in the db
-        $item = $this->crud->create($request->except(['save_action', '_token', '_method']));
+        $item = $this->crud->create($request->except(['save_action', '_token', '_method', 'current_tab']));
         $this->data['entry'] = $this->crud->entry = $item;
 
         // show a success message
@@ -136,6 +135,9 @@ class CrudController extends BaseController
     public function edit($id)
     {
         $this->crud->hasAccessOrFail('update');
+
+        // get entry ID from Request (makes sure its the last ID for nested resources)
+        $id = $this->crud->getCurrentEntryId() ?? $id;
 
         // get the info for that entry
         $this->data['entry'] = $this->crud->getEntry($id);
@@ -175,7 +177,7 @@ class CrudController extends BaseController
 
         // update the row in the db
         $item = $this->crud->update($request->get($this->crud->model->getKeyName()),
-                            $request->except('save_action', '_token', '_method'));
+                            $request->except('save_action', '_token', '_method', 'current_tab'));
         $this->data['entry'] = $this->crud->entry = $item;
 
         // show a success message
@@ -198,6 +200,9 @@ class CrudController extends BaseController
     {
         $this->crud->hasAccessOrFail('show');
 
+        // get entry ID from Request (makes sure its the last ID for nested resources)
+        $id = $this->crud->getCurrentEntryId() ?? $id;
+
         // set columns from db
         $this->crud->setFromDb();
 
@@ -205,6 +210,11 @@ class CrudController extends BaseController
         foreach ($this->crud->columns as $key => $column) {
             // remove any autoset relationship columns
             if (array_key_exists('model', $column) && array_key_exists('autoset', $column) && $column['autoset']) {
+                $this->crud->removeColumn($column['name']);
+            }
+
+            // remove the row_number column, since it doesn't make sense in this context
+            if ($column['type'] == 'row_number') {
                 $this->crud->removeColumn($column['name']);
             }
         }
@@ -232,6 +242,9 @@ class CrudController extends BaseController
     public function destroy($id)
     {
         $this->crud->hasAccessOrFail('delete');
+
+        // get entry ID from Request (makes sure its the last ID for nested resources)
+        $id = $this->crud->getCurrentEntryId() ?? $id;
 
         return $this->crud->delete($id);
     }
