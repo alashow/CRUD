@@ -1,5 +1,4 @@
 @if ($crud->exportButtons())
-    <script src="{{ asset('vendor/backpack/datatables/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/backpack/datatables/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('vendor/backpack/datatables/buttons.bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/backpack/datatables/jszip.min.js') }}"></script>

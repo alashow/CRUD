@@ -88,7 +88,7 @@
 
 @section('after_styles')
   {{-- DATA TABLES --}}
-  <link href="{{ asset('vendor/adminlte/plugins/datatables/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ asset('vendor/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/crud.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/form.css') }}">
   <link rel="stylesheet" href="{{ asset('vendor/backpack/crud/css/list.css') }}">
@@ -99,7 +99,7 @@
 
 @section('after_scripts')
 
-	@include('crud::inc.datatables_logic')
+  @include('crud::inc.datatables_logic')
 
   <script src="{{ asset('vendor/backpack/crud/js/crud.js') }}"></script>
   <script src="{{ asset('vendor/backpack/crud/js/form.js') }}"></script>
