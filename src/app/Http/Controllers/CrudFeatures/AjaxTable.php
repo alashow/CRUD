@@ -18,6 +18,9 @@ trait AjaxTable
 
         // if a search term was present
         if ($this->request->input('search') && $this->request->input('search')['value']) {
+            // deny access if trying to search and searching is not allowed
+            $this->crud->hasAccessOrFail('search');
+
             // filter the results accordingly
             $this->crud->applySearchTerm($this->request->input('search')['value']);
             // recalculate the number of filtered rows

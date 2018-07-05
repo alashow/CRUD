@@ -13,6 +13,7 @@ class CrudPanelAccessTest extends BaseCrudPanelTest
         'create',
         'update',
         'delete',
+        'search',
     ];
 
     private $fullAccessList = [
@@ -20,6 +21,7 @@ class CrudPanelAccessTest extends BaseCrudPanelTest
         'create',
         'update',
         'delete',
+        'search',
         'revisions',
         'reorder',
         'show',
