@@ -92,6 +92,7 @@
           },
           processing: true,
           serverSide: true,
+          searching: JSON.parse('{!! json_encode($crud->hasAccess('search')) !!}'),
           ajax: {
               "url": "{!! url($crud->route.'/search').'?'.Request::getQueryString() !!}",
               "type": "POST"
